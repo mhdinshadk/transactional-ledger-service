@@ -20,14 +20,16 @@ Built with **Node.js + TypeScript + Express + MongoDB (Mongoose)** and fully doc
 
 ---
 
-## 🧰 Tech Stack
-
-- **Language**: Node.js (TypeScript)
-- **Framework**: Express
-- **Database**: MongoDB (Mongoose)
-- **Validation**: Zod
-- **Testing**: Jest + Supertest (for integration tests)
-- **Containerization**: Docker + docker-compose
+1️⃣ Clone the repo
+git clone <YOUR_REPO_URL>
+cd transactional-ledger-service
+2️⃣ Install dependencies
+npm install
+3️⃣ Environment variables
+I also addedd the file i dont make hidden for the test.
+4️⃣ Run in development
+npm run dev
+5️⃣ Build & run in production mode
 
 ---
 

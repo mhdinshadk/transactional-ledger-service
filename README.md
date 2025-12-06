@@ -59,3 +59,23 @@ Simplified development experience
 Easy to dockerize
 
 No need for strict SQL schema migrations for this assignment
+
+
+1️⃣ Clone the repo
+git clone <YOUR_REPO_URL>
+cd transactional-ledger-service
+2️⃣ Install dependencies
+npm install
+3️⃣ Environment variables
+I also addedd the file i dont make hidden for the test.
+4️⃣ Run in development
+npm run dev
+5️⃣ Build & run in production mode
+npm run build
+npm start
+
+Dockerized Setup
+1️⃣ Build & start
+docker-compose up --build
+stop:
+docker-compose down

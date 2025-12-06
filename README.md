@@ -1,83 +1,117 @@
 # Transactional Ledger Service
 
-A simplified internal ledger system that handles money movement between accounts with a focus on **financial correctness**, **concurrency safety**, and **idempotency**.
+A simplified internal ledger system that handles money movement between accounts with a focus on:
 
-Built with **Node.js + TypeScript + Express + MongoDB (Mongoose)** and fully dockerized.
+- Financial correctness
+- Concurrency safety
+- Idempotency
+- Atomic operations
 
----
+Built using Node.js, TypeScript, Express, and MongoDB (Mongoose). Fully Dockerized.
 
-## ✨ Features
+--------------------------------------------------------------------
 
-- Create accounts (wallets) in **USD / INR**
-- Deposit & Withdraw (credit / debit) with **overdraft protection** (no negative balance)
-- Internal transfers between accounts (debit + credit)
-- **Idempotent** transfers using `Idempotency-Key` header
-- Account balance endpoint
+## Features
+
+### Accounts
+- Create accounts (wallets) in USD or INR
+- Starting balance is always 0
+
+### Transactions
+- Deposit (Credit)
+- Withdraw (Debit) with overdraft protection (balance cannot go negative)
+
+### Internal Transfers
+- Atomic debit and credit
+- If debit fails, credit does not execute
+- Supports idempotency using the "Idempotency-Key" header
+
+### Balance and History
+- Get current account balance
 - Paginated transaction history (ledger lines)
-- Concurrency-safe updates using MongoDB atomic operations
-- Centralized error handling with clean JSON responses
-- Strict TypeScript types
 
----
+### Safety and Correctness
+- MongoDB atomic updates ($inc, $gte)
+- Prevents race conditions during transfers
+- Duplicate requests handled through idempotency
 
-1️⃣ Clone the repo
+### Developer Experience
+- Centralized error handling with consistent JSON responses
+- Strong TypeScript typing across the project
+- Fully dockerized services for easy deployment
+
+--------------------------------------------------------------------
+
+## Installation and Setup
+
+### 1. Clone the repository
 git clone <YOUR_REPO_URL>
 cd transactional-ledger-service
-2️⃣ Install dependencies
+
+### 2. Install dependencies
 npm install
-3️⃣ Environment variables
-I also addedd the file i dont make hidden for the test.
-4️⃣ Run in development
+
+### 3. Environment Variables
+A `.env` file is included for testing.
+
+Example:
+MONGO_URI=mongodb://localhost:27017/ledger
+PORT=5000
+
+### 4. Run in development
 npm run dev
-5️⃣ Build & run in production mode
 
----
-
-Technology Choices
-Backend: Node.js + TypeScript
-
-Reasons:
-
-Type safety
-
-Lightweight and fast
-
-Good for REST services
-
-Mature ecosystem (Express, Mongoose)
-
-Database: MongoDB
-
-Reasons:
-
-Flexible schema for ledger entries
-
-Supports atomic updates using $inc and conditional filters ($gte)
-
-Perfect for wallet-style accounts
-
-Simplified development experience
-
-Easy to dockerize
-
-No need for strict SQL schema migrations for this assignment
-
-
-1️⃣ Clone the repo
-git clone <YOUR_REPO_URL>
-cd transactional-ledger-service
-2️⃣ Install dependencies
-npm install
-3️⃣ Environment variables
-I also addedd the file i dont make hidden for the test.
-4️⃣ Run in development
-npm run dev
-5️⃣ Build & run in production mode
+### 5. Build and run in production
 npm run build
 npm start
 
-Dockerized Setup
-1️⃣ Build & start
-docker-compose up --build
-stop:
-docker-compose down
+--------------------------------------------------------------------
+
+## Technology Choices
+
+### Backend: Node.js + TypeScript
+Reasons:
+- Type safety
+- Lightweight and fast
+- Good ecosystem for REST APIs (Express)
+- Works seamlessly with MongoDB and Mongoose
+
+### Database: MongoDB
+Reasons:
+- Flexible schema structure for accounts and ledger entries
+- Supports atomic operations ($inc, conditional updates)
+- Ideal for wallet/accounting systems
+- Easy to containerize for production
+
+--------------------------------------------------------------------
+
+## Project Structure
+
+transactional-ledger-service/
+│
+├── src/
+│   ├── controllers/
+│   ├── routes/
+│   ├── models/
+│   ├── services/
+│   ├── middlewares/
+│   ├── utils/
+│   └── app.ts
+│
+├── docker-compose.yml
+├── Dockerfile
+├── tsconfig.json
+├── package.json
+└── README.md
+
+--------------------------------------------------------------------
+
+## Testing (Optional)
+- Unit tests for account operations
+- Idempotency behavior tests
+- Concurrency handling tests
+
+--------------------------------------------------------------------
+
+## License
+This project is for assignment and demonstration purposes only.
